@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "challenge:03": "ts-node-dev --respawn --transpile-only challenge-03/main.ts",
-    "test": "jest --watch"
+    "test": "jest",
+    "test:watch": "npm run test -- --watchAll"
   },
   "keywords": [],
   "author": "Yony Calsin",
