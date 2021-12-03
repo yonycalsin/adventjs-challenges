@@ -15,6 +15,7 @@ export function isValid(letter: string) {
         break;
       case ")":
         tokens.end = i;
+        break;
     }
   }
 
@@ -24,15 +25,17 @@ export function isValid(letter: string) {
 
   const group = letter.substring(tokens.start, tokens.end + 1);
 
-  const hasWrongGroupContent = /[\[\{]/gi.test(group);
+  const groupContent = group.replace(/(^\()|(\)$)/gi, "");
 
-  if (hasWrongGroupContent) {
+  const hasEmptyGroupContent = groupContent.length;
+
+  if (hasEmptyGroupContent === 0) {
     return false;
   }
 
-  const hasEmptyGroupContent = group.replace(/(^\()|(\)$)/gi, "").length;
+  const hasWrongGroupContent = /[\[\{]/gi.test(groupContent);
 
-  if (hasEmptyGroupContent === 0) {
+  if (hasWrongGroupContent) {
     return false;
   }
 
