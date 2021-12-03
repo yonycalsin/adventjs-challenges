@@ -1,4 +1,4 @@
-import isNil from "../internal/is-nil";
+const isNil = (value: any) => value === null || value === undefined;
 
 export function isValid(letter: string) {
   const characters = letter.split("");
@@ -11,6 +11,10 @@ export function isValid(letter: string) {
   for (let i = 0; i < characters.length; i++) {
     switch (characters[i]) {
       case "(":
+        if (tokens.start !== null) {
+          break;
+        }
+
         tokens.start = i;
         break;
       case ")":
@@ -33,7 +37,7 @@ export function isValid(letter: string) {
     return false;
   }
 
-  const hasWrongGroupContent = /[\[\{]/gi.test(groupContent);
+  const hasWrongGroupContent = /[\[|\{]|\(|\)/gi.test(groupContent);
 
   if (hasWrongGroupContent) {
     return false;
